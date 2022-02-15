@@ -56,6 +56,8 @@ function krabs(req, res, handle, app, config) {
                 case 0:
                     // @ts-ignore
                     req.locale = null;
+                    // @ts-ignore
+                    req.locales = null;
                     if (!(config !== null && config !== void 0)) return [3 /*break*/, 1];
                     _g = config;
                     return [3 /*break*/, 3];
@@ -106,6 +108,8 @@ function krabs(req, res, handle, app, config) {
                         if (detectedLocale) {
                             // @ts-ignore
                             req.locale = detectedLocale;
+                            // @ts-ignore
+                            req.locales = tenant.i18n.locales;
                         }
                         pathname = newPath.pathname;
                     }
