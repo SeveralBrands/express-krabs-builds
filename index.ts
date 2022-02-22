@@ -24,6 +24,8 @@ async function krabs(
   req.locale = null;
   // @ts-ignore
   req.locales = null;
+  // @ts-ignore
+  req.defaultLocale = null;
 
   const { tenants, enableVhostHeader } = config ?? (await getTenantConfig());
 
@@ -87,6 +89,8 @@ async function krabs(
       req.locale = detectedLocale;
       // @ts-ignore
       req.locales = tenant.i18n.locales;
+      // @ts-ignore
+      req.defaultLocale = tenant.i18n.defaultLocale;
     }
 
     pathname = newPath.pathname;
