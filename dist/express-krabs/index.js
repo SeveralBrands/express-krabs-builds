@@ -99,7 +99,9 @@ function krabs(req, res, handle, app, config) {
                         ((_b = tenant === null || tenant === void 0 ? void 0 : tenant.i18n) === null || _b === void 0 ? void 0 : _b.defaultLocale) &&
                         ((_c = tenant === null || tenant === void 0 ? void 0 : tenant.i18n) === null || _c === void 0 ? void 0 : _c.locales.includes((_d = tenant === null || tenant === void 0 ? void 0 : tenant.i18n) === null || _d === void 0 ? void 0 : _d.defaultLocale))) {
                         newPath = normalize_locale_path_1.normalizeLocalePath(pathname, tenant.i18n.locales);
-                        preferredLocale = get_accept_preferred_locale_1.getAcceptPreferredLocale(tenant.i18n, req.headers);
+                        preferredLocale = req.headers['accept-language']
+                            ? get_accept_preferred_locale_1.getAcceptPreferredLocale(tenant.i18n, req.headers)
+                            : null;
                         detectedLocale = (newPath === null || newPath === void 0 ? void 0 : newPath.detectedLocale) || preferredLocale || tenant.i18n.defaultLocale;
                         //comment
                         if (detectedLocale.toLowerCase() !== (newPath === null || newPath === void 0 ? void 0 : newPath.detectedLocale) &&
