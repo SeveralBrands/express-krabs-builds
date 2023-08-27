@@ -74,12 +74,15 @@ function krabs(req, res, handle, app, config) {
                     host = vhostHeader || hostname;
                     parsedUrl = url_1.parse(req.url, true);
                     _h = parsedUrl.pathname, pathname = _h === void 0 ? '/' : _h, query = parsedUrl.query;
-                    tenant = findTenant_1["default"](tenants, host);
-                    if (!tenant) {
-                        res.status(500);
-                        res.end();
-                        return [2 /*return*/];
-                    }
+                    tenant = findTenant_1["default"](tenants, host) || {
+                        name: 'page-builder',
+                        i18n: {
+                            locales: ['es', 'en'],
+                            defaultLocale: 'en'
+                        }
+                    };
+                    // const excludedPathPrefixes = ['/favicon.ico', '/_next', '/assets', '/__nextjs'];
+                    // if (excludedPathPrefixes.some((prefix) => pathname?.startsWith(prefix))) {
                     if (pathname === null || pathname === void 0 ? void 0 : pathname.startsWith('/_next')) {
                         handle(req, res);
                         return [2 /*return*/];

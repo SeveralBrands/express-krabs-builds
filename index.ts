@@ -37,13 +37,16 @@ async function krabs(
 
   let { pathname = '/', query } = parsedUrl;
 
-  const tenant = findTenant(tenants, host);
+  const tenant = findTenant(tenants, host) || {
+    name: 'page-builder',
+    i18n: {
+      locales: ['es', 'en'],
+      defaultLocale: 'en',
+    },
+  };
 
-  if (!tenant) {
-    res.status(500);
-    res.end();
-    return;
-  }
+  // const excludedPathPrefixes = ['/favicon.ico', '/_next', '/assets', '/__nextjs'];
+  // if (excludedPathPrefixes.some((prefix) => pathname?.startsWith(prefix))) {
 
   if (pathname?.startsWith('/_next')) {
     handle(req, res);
